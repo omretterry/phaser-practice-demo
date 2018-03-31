@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>sprite</title>
+  <script src='js/phaser.min.js'></script>
+</head>
+
+<body>
+  <script>
+    var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update, render:render });
+    var happy;
+
+    function preload() {
+      game.load.image('happy', 'img/happy.png');
+    }
+
+    function create() {
+      happy = game.add.sprite(0, 0, 'happy');
+
+      //happy.width = 100;
+      //happy.height = 200;
+
+      happy.x = 300;
+      happy.y = 300;
+
+      //happy.anchor.x = 0.5;
+      //happy.anchor.y = 0.5;
+      happy.anchor = new Phaser.Point(0.5,0.5);
+      happy.alpha = 0.9;
+      //happy.scale.x = 2;
+      happy.scale.y = -1;
+    }
+
+    function update() {
+      //happy.angle += 1;
+      //happy.rotation += 0.017;
+    }
+
+    function render() {
+      game.debug.spriteInfo(happy, 32, 32);
+    }
+  </script>
+</body>
+
+</html>

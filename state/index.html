@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>state</title>
+  <script src='js/phaser.min.js'></script>
+</head>
+
+<body>
+  <script>
+    var state = {
+      preload: () => {
+        console.log('preload');
+      },
+     
+      create: () => {
+        console.log('create');
+      },
+     
+      update: () => {
+        console.log('update');
+      },
+
+      render: () => {
+        console.log('render');
+      }
+    }
+
+    var game = new Phaser.Game(800, 600, Phaser.AUTO, '', state);
+
+  </script>
+</body>
+
+</html>
