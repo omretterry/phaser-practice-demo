@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>spritesheet</title>
+  <script src='js/phaser.min.js'></script>
+</head>
+
+<body>
+  <script>
+    var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+    var person;
+    var cursors;
+
+    function preload() {
+      game.load.spritesheet('person','img/person.png', 32, 40);
+      //game.load.spritesheet('test', 'img/test.png', 64, 64 );
+    }
+
+    function create() {
+      person = game.add.sprite(0,0,'person');
+      person.animations.add('down', [0,1,2,3]);
+      person.animations.add('left', [4,5,6,7]);
+      person.animations.add('right', [8,9,10,11]);
+      person.animations.add('up', [12,13,14,15]);
+
+      //test = game.add.sprite(0, 0, 'test');
+
+      //test.animations.add('test');
+      //test.animations.play('test',10,true);
+      cursors = game.input.keyboard.createCursorKeys();
+    }
+
+    function update() {
+      if(cursors.down.isDown){
+        person.animations.play('down',10,false);
+        person.y += 5;
+      }
+      if(cursors.left.isDown){
+        person.animations.play('left',10,false);
+        person.x -= 5;
+      }
+      if(cursors.right.isDown){
+        person.animations.play('right',10,false);
+        person.x += 5;
+      }
+      if(cursors.up.isDown){
+        person.animations.play('up',10,false);
+        person.y -= 5;
+      }
+    }
+
+  </script>
+</body>
+
+</html>
