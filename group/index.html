@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>group</title>
+  <script src='js/phaser.min.js'></script>
+</head>
+
+<body>
+  <script>
+    var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+    var group1;
+
+    function preload() {
+      game.load.image('happy', 'img/happy.png');
+      game.load.image('angry', 'img/angry.png');
+      game.load.spritesheet('ss', 'img/ss.png', 64, 64);
+    }
+
+    function create() {
+      var happy = game.add.sprite(0, 0, 'happy');
+      var angry = game.add.sprite(100, 100, 'angry');
+      var ss = game.add.sprite(200, 200, 'ss');
+
+      group1 = game.add.group();
+      group1.create(300, 300, 'ss', 1);
+      group1.add(happy);
+      group1.createMultiple(5, 'ss', [1,2,3], true, testSprite, this);
+      //group1.forEach(item => {
+      //  item.x = game.world.randomX;
+      //  item.y = game.world.randomY;
+      //})
+      group1.align(5,-1,100,100);
+      console.log(group1.count(),group1.countLiving(),group1.countDead());
+      happy.kill();
+      console.log(group1.count(),group1.countLiving(),group1.countDead());
+    }
+    
+    function update() {
+      group1.setAll('x',1,false,false,1);
+    }
+
+    function testSprite(){
+      console.log('callback');
+    }
+
+  </script>
+</body>
+
+</html>
