@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>text</title>
+  <script src='js/phaser.min.js'></script>
+</head>
+
+<body>
+  <script>
+    var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+
+    function preload() {
+      game.load.image('happy', 'img/happy.png');
+      game.load.image('angry', 'img/angry.png');
+    }
+
+    function create() {
+      var happy = game.add.sprite(0, 0, 'happy');
+      var angry = game.add.sprite(100, 100, 'angry');
+
+      game.stage.setBackgroundColor('rgb(255,255,255)');
+
+      var text = game.add.text(100,100,'hello world    ',{
+        fill:"#FF0000",
+        stroke: "green",
+        strokeThickness: '5',
+        fontSize: 45,
+      })
+
+      text.setStyle({
+        fill:"#FF0000",
+        fontSize: 32,
+      })
+      
+      text.setText('hello china');
+      text.padding.x = 10;
+      text.setShadow(4,4,'rgba(0,0,0,1)',8);
+
+    }
+
+    function update() {
+    }
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>camera</title>
+  <script src='js/phaser.min.js'></script>
+</head>
+
+<body>
+  <script>
+    var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update, render: render });
+    var cursors;
+    var angry;
+    function preload() {
+      game.load.image('happy', 'img/happy.png');
+      game.load.image('angry', 'img/angry.png');
+    }
+
+    function create() {
+      var happy = game.add.sprite(0, 0, 'happy');
+      angry = game.add.sprite(100, 100, 'angry');
+
+      game.world.resize(1600, 1200);
+
+      var group1 = game.add.group();
+
+      for (var i = 0; i < 50; i++) {
+        group1.create(game.world.randomX, game.world.randomY, 'happy');
+      }
+      angry.anchor = new Phaser.Point(0.5, 0.5);
+      game.camera.follow(angry, Phaser.Camera.FOLLOW_TOPDOWN, 0.1, 0.1);
+      cursors = game.input.keyboard.createCursorKeys();
+
+      //game.camera.fade(0xff0000,2000,false,0.1);
+      //game.camera.flash(0xff0000,2000,false,1);
+      game.camera.shake(0.1,2000,true,Phaser.Camera.SHAKE_HORIZONTAL);
+    }
+
+    function update() {
+      if (cursors.up.isDown) {
+        angry.y -= 4;
+      }
+      else if (cursors.down.isDown) {
+        angry.y += 4;
+      }
+
+      if (cursors.left.isDown) {
+        angry.x -= 4;
+      }
+      else if (cursors.right.isDown) {
+        angry.x += 4;
+      }
+    }
+
+    function render() {
+      game.debug.cameraInfo(game.camera, 32, 32);
+    }
+
+  </script>
+</body>
+
+</html>
