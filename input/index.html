@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>input</title>
+  <script src='js/phaser.min.js'></script>
+</head>
+
+<body>
+  <script>
+    var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+    var spacebar;
+    var happy;
+    var direct;
+
+    function preload() {
+      game.load.image('happy', 'img/happy.png');
+      game.load.image('angry', 'img/angry.png');
+    }
+
+    function create() {
+      happy = game.add.sprite(0, 0, 'happy');
+      var angry = game.add.sprite(100, 100, 'angry');
+
+      spacebar = game.input.keyboard.addKey(Phaser.KeyCode.SPACEBAR);
+      direct = game.input.keyboard.addKeys({ 'up': Phaser.KeyCode.W, 'down': Phaser.KeyCode.S, 'left': Phaser.KeyCode.A, 'right': Phaser.KeyCode.D });
+      //game.input.keyboard.createCursorKeys()
+
+      game.input.maxPointer = 2;
+    }
+
+    function spaceDown(){
+      happy.y += 5;
+    }
+
+    function update() {
+      if(direct.up.justPressed()){
+        happy.x += 5;
+      }
+      //if(game.input.activePointer.leftButton.isDown){
+      //  happy.x += 5;
+      //}
+      if(game.input.pointer1.isDown){
+        happy.x += 5;
+      }
+    }
+
+  </script>
+</body>
+
+</html>

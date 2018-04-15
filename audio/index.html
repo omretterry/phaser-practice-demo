@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>audio</title>
+  <script src='js/phaser.min.js'></script>
+</head>
+
+<body>
+  <script>
+    var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+
+    function preload() {
+      game.load.image('happy', 'img/happy.png');
+      game.load.image('angry', 'img/angry.png');
+
+      game.load.audio('supermario', [
+        'audio/SuperMarioBros.mp3',
+        'audio/SuperMarioBros.ogg',
+      ])
+
+      game.load.audiosprite('as', 'audiosprite/as.mp3','audiosprite/as.json');
+    }
+
+    function create() {
+      var happy = game.add.sprite(0, 0, 'happy');
+      var angry = game.add.sprite(100, 100, 'angry');
+
+      //var audio = game.add.audio('supermario');
+
+      //audio.addMarker('marker1',4,3);
+
+      //audio.play('marker1');
+      //audio.play()
+
+
+      var audio2 = game.add.audioSprite('as');
+      audio2.play('gun2');
+    }
+
+    function update() {
+    }
+
+  </script>
+</body>
+
+</html>

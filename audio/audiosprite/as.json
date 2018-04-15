@@ -1,0 +1,20 @@
+{
+  "resources": [
+    "as.ogg",
+    "as.m4a",
+    "as.mp3",
+    "as.ac3"
+  ],
+  "spritemap": {
+    "gun1": {
+      "start": 0,
+      "end": 2.1541950113378685,
+      "loop": false
+    },
+    "gun2": {
+      "start": 4,
+      "end": 5.9274376417233565,
+      "loop": false
+    }
+  }
+}
