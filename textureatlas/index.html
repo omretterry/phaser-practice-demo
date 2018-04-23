@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>textureatlas</title>
+  <script src='js/phaser.min.js'></script>
+</head>
+
+<body>
+  <script>
+    var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+
+    function preload() {
+      game.load.image('happy', 'img/happy.png');
+      game.load.image('angry', 'img/angry.png');
+      game.load.atlas('atlas', 'img/spritesheet.png', 'img/sprites.json')
+    }
+
+    function create() {
+      var happy = game.add.sprite(0, 0, 'happy');
+      var angry = game.add.sprite(100, 100, 'angry');
+
+      var test1 = game.add.sprite(250,250,'atlas','test2');
+
+      var all = game.add.sprite(500,500,'atlas');
+
+      all.animations.add('play',Phaser.Animation.generateFrameNames('test',1,4));
+
+      all.animations.play('play',10,true);
+    }
+
+    function update() {
+    }
+
+  </script>
+</body>
+
+</html>

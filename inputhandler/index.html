@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>inputhandler</title>
+  <script src='js/phaser.min.js'></script>
+</head>
+
+<body>
+  <script>
+    var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update, render:render });
+    var happy;
+    var angry;
+
+    function preload() {
+      game.load.image('happy', 'img/happy.png');
+      game.load.image('angry', 'img/angry.png');
+    }
+
+    function create() {
+      happy = game.add.sprite(0, 0, 'happy');
+      angry = game.add.sprite(100, 100, 'angry');
+      happy.inputEnabled = true;
+      happy.input.enableDrag(true,true);
+      happy.input.enableSnap(30,30,false,true);
+      
+    }
+
+    function update() {
+      if(happy.input.justOut(0,1000)){
+        angry.x += 5;
+      }
+    }
+    
+    function render() {
+      game.debug.spriteInputInfo(happy, 32, 32);
+    }
+
+  </script>
+</body>
+
+</html>
