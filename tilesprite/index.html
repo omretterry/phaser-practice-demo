@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>tilesprite</title>
+  <script src='js/phaser.min.js'></script>
+</head>
+
+<body>
+  <script>
+    var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+    var tilesprite;
+
+    function preload() {
+      game.load.image('happy', 'img/happy.png');
+      game.load.image('angry', 'img/angry.png');
+    }
+
+    function create() {
+      var happy = game.add.sprite(0, 0, 'happy');
+      var angry = game.add.sprite(100, 100, 'angry');
+
+      tilesprite = game.add.tileSprite(50, 50, 150, 150, 'happy');
+      tilesprite.autoScroll(24,24);
+    }
+
+    function update() {
+      //tilesprite.tilePosition.y += 5;
+    }
+
+  </script>
+</body>
+
+</html>
