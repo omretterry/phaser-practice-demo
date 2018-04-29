@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>tween</title>
+  <script src='js/phaser.min.js'></script>
+</head>
+
+<body>
+  <script>
+    var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+    var tween;
+
+    function preload() {
+      game.load.image('happy', 'img/happy.png');
+      game.load.image('angry', 'img/angry.png');
+    }
+
+    function create() {
+      var happy = game.add.sprite(0, 0, 'happy');
+      var angry = game.add.sprite(100, 100, 'angry');
+
+      tween = game.add.tween(happy);
+      //tween.to({x:200,y:200},2000).to({x:0,y:400},1000).repeatAll(3).start();
+      tween.to({ x: [500, 500, 100, 100], y: [250, 150, 150, 250] }, 3000, "Linear").start();
+    }
+
+    function update() {
+      if(game.input.activePointer.leftButton.isDown){
+        //tween.isPaused ? tween.resume() : tween.pause();
+        tween.stop();
+      }
+    }
+
+  </script>
+</body>
+
+</html>
