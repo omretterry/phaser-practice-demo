@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>p2</title>
+  <script src='js/phaser.min.js'></script>
+</head>
+
+<body>
+  <script>
+    var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+    var cursors;
+    var happy;
+    var angry;
+
+    function preload() {
+      game.load.image('happy', 'img/happy.png');
+      game.load.image('angry', 'img/angry.png');
+
+      game.load.physics('angry-p', 'img/angry.json');
+    }
+
+    function create() {
+      happy = game.add.sprite(50, 50, 'happy');
+      angry = game.add.sprite(200, 200, 'angry');
+
+      game.physics.startSystem(Phaser.Physics.P2JS);
+
+      game.physics.p2.enable([happy, angry], true);
+
+      //happy.body.setCircle(20,0,0,12);
+      angry.body.setRectangle(50, 100);
+      //happy.body.clearShapes();
+      //happy.body.addRectangle(35, 10);
+      //happy.body.addCircle(10, -20, 0);
+      //happy.body.addCircle(10, 20, 0);
+      //angry.body.clearShapes();
+      //angry.body.loadPolygon('angry-p','angry');
+
+      cursors = game.input.keyboard.createCursorKeys();
+
+      //happy.body.onBeginContact.add(beginContact,this);
+      //game.physics.p2.setImpactEvents(true);
+      //happy.body.createBodyCallback(angry,bodyCallback,this);
+
+      var material1 = game.physics.p2.createMaterial('material1',happy.body);
+      var material2 = game.physics.p2.createMaterial('material2',angry.body);
+      contactMaterial = game.physics.p2.createContactMaterial(material1, material2);
+
+      //contactMaterial.friction = 0.1;
+      //contactMaterial.restitution = 10;
+      //contactMaterial.surfaceVelocity = 1;
+      contactMaterial.stiffness = 100;
+
+      //============start collision grop===============
+      /*
+      var group1 = game.add.group();
+      var group2 = game.add.group();
+
+      var happyGroup = game.physics.p2.createCollisionGroup();
+      var angryGroup = game.physics.p2.createCollisionGroup();
+
+      for(var i = 0; i < 20; i++){
+        var happyItem = group1.create(game.world.randomX,game.world.randomY,'happy');
+        game.physics.p2.enable(happyItem,true);
+        happyItem.body.setCollisionGroup(happyGroup);
+        happyItem.body.collides([angryGroup]);
+
+        var angryItem = group1.create(game.world.randomX,game.world.randomY,'angry');
+        game.physics.p2.enable(angryItem,true);
+        angryItem.body.setCollisionGroup(angryGroup);
+        angryItem.body.collides([happyGroup]);
+      }
+
+      game.physics.p2.updateBoundsCollisionGroup();
+      */
+    }
+
+    function bodyCallback(body1,body2){
+      console.log(body1,body2);
+    }
+
+    function beginContact(targetBody){
+      console.log(targetBody);
+      //targetBody.sprite.kill();
+    }
+
+    function update() {
+      if(cursors.up.isDown){
+        happy.body.moveUp(100);
+      }
+      if(cursors.down.isDown){
+        happy.body.moveDown(100);
+      }
+      if(cursors.left.isDown){
+        happy.body.moveLeft(100);
+      }
+      if(cursors.right.isDown){
+        happy.body.moveRight(100);
+      }
+    }
+
+  </script>
+</body>
+
+</html>

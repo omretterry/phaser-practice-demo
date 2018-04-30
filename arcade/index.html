@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>arcade</title>
+  <script src='js/phaser.min.js'></script>
+</head>
+
+<body>
+  <script>
+    var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update,render: render });
+    var happy;
+    var angry;
+
+    function preload() {
+      game.load.image('happy', 'img/happy.png');
+      game.load.image('angry', 'img/angry.png');
+    }
+
+    function create() {
+      happy = game.add.sprite(0, 0, 'happy');
+      angry = game.add.sprite(400, 0, 'angry');
+
+      game.physics.startSystem(Phaser.Physics.ARCADE);
+      game.physics.arcade.enable(happy);
+      game.physics.arcade.enable(angry);
+      //happy.body.setSize(12,12,20,20);
+
+      game.physics.arcade.gravity.y = 100;
+      //happy.body.gravity.y = 100;
+      //angry.body.allowGravity = false;
+
+      //angry.body.velocity = new Phaser.Point(100,100);
+      //happy.body.acceleration.x = 100;
+      //happy.body.maxVelocity.x = 20;
+
+      //angry.body.angularVelocity = 100;
+      //angry.body.angularAcceleration = 100;
+      //angry.body.maxAngular = 200;
+      //happy.body.angularVelocity = -100;
+
+      //happy.body.drag.y = 50;
+
+      //happy.body.velocity.x = 101;
+      //angry.body.velocity.x = -100;
+
+      happy.body.bounce.y = 0.5;
+      angry.body.bounce.y = 0.5;
+
+      happy.body.collideWorldBounds = true;
+    }
+
+    function update() {
+      //game.physics.arcade.collide(happy,angry,collide,process,this);
+    }
+
+    function collide(sprite1,sprite2){
+      console.log(sprite1,sprite2);
+      sprite1.kill();
+    }
+
+    function process(sprite1,sprite2){
+      //if(sprite1.body.velocity.x > 100){
+      //  return true;
+      //} else {
+      //  return false;
+      //}
+
+      return sprite1.body.velocity.x > 100;
+    }
+
+    function render(){
+      game.debug.body(happy);
+      game.debug.body(angry);
+
+      //game.debug.bodyInfo(happy,32,32);
+    }
+
+  </script>
+</body>
+
+</html>
