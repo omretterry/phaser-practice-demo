@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>particle</title>
+  <script src='js/phaser.min.js'></script>
+</head>
+
+<body>
+  <script>
+    var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+
+    function preload() {
+      game.load.image('happy', 'img/happy.png');
+      game.load.image('angry', 'img/angry.png');
+    }
+
+    function create() {
+      var happy = game.add.sprite(0, 0, 'happy');
+      var angry = game.add.sprite(100, 100, 'angry');
+
+      var emitter = game.add.emitter(400,50,100);
+      emitter.makeParticles('happy');
+      emitter.width = 500;
+      emitter.height = 50;
+
+      //emitter.explode(1000);
+      emitter.flow(2000,5000,2,4,true);
+    }
+
+    function update() {
+    }
+
+  </script>
+</body>
+
+</html>
